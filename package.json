@@ -30,6 +30,7 @@
   "author": "",
   "license": "Apache-2.0",
   "dependencies": {
+    "@inceptiongt/json-schema-editor-visual": "^0.0.1",
     "ajv": "^5.5.1",
     "ajv-i18n": "^2.2.0",
     "axios": "0.18.1",
@@ -81,9 +82,7 @@
     "tslib": "1.8.0",
     "underscore": "1.8.3",
     "url": "0.11.0",
-    "yapi-plugin-qsso": "^1.1.0",
-    "qs": "^6.7.0",
-    "vm2": "^3.8.4"
+    "yapi-plugin-qsso": "^1.1.0"
   },
   "devDependencies": {
     "antd": "3.2.2",
@@ -117,7 +116,6 @@
     "extract-text-webpack-plugin": "2.0.0",
     "ghooks": "^2.0.0",
     "happypack": "^4.0.0-beta.5",
-    "json-schema-editor-visual": "^1.0.23",
     "less": "^2.7.2",
     "less-loader": "^4.0.5",
     "markdown-it-include": "^1.0.0",

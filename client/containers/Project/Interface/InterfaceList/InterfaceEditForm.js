@@ -13,9 +13,9 @@ import AceEditor from 'client/components/AceEditor/AceEditor';
 import axios from 'axios';
 import { MOCK_SOURCE } from '../../../../constants/variable.js';
 import Editor from 'common/tui-editor/dist/tui-editor-Editor-all.min.js';
-const jSchema = require('json-schema-editor-visual');
-const ResBodySchema = jSchema({ lang: 'zh_CN', mock: MOCK_SOURCE });
-const ReqBodySchema = jSchema({ lang: 'zh_CN', mock: MOCK_SOURCE });
+const jSchema = require('@inceptiongt/json-schema-editor-visual');
+const ResBodySchema = jSchema({ lang: 'zh_CN' });
+const ReqBodySchema = jSchema({ lang: 'zh_CN' });
 const TabPane = Tabs.TabPane;
 
 
@@ -36,11 +36,17 @@ function checkIsJsonSchema(json) {
     if (!json.type) {
       return false;
     }
-    json.type = json.type.toLowerCase();
-    let types = ['object', 'string', 'number', 'array', 'boolean', 'integer'];
-    if (types.indexOf(json.type) === -1) {
-      return false;
+    let types = ['object', 'string', 'number', 'array', 'boolean', 'integer', 'null'];
+    if (_.isArray(json.type)) {
+      if(json.type.some(t => !types.includes(t)))
+      return false
+    } else {
+      json.type = json.type.toLowerCase();
+      if (types.indexOf(json.type) === -1) {
+        return false;
+      }
     }
+    
     return JSON.stringify(json);
   } catch (e) {
     return false;
@@ -1123,7 +1129,7 @@ class InterfaceEditForm extends Component {
                         EditFormContext.props.changeEditStatus(true);
                       }
                     }}
-                    isMock={true}
+                    // isMock={true}
                     data={req_body_other_use_schema_editor}
                   />
                 )}
@@ -1236,7 +1242,7 @@ class InterfaceEditForm extends Component {
                             EditFormContext.props.changeEditStatus(true);
                           }
                         }}
-                        isMock={true}
+                        // isMock={true}
                         data={res_body_use_schema_editor}
                       />
                     </div>

@@ -22,13 +22,13 @@ const jsf = require('json-schema-faker');
 const { schemaValidator } = require('../../common/utils');
 const http = require('http');
 
-jsf.extend('mock', function () {
-  return {
-    mock: function (xx) {
-      return Mock.mock(xx);
-    }
-  };
-});
+// jsf.extend('mock', function () {
+//   return {
+//     mock: function (xx) {
+//       return Mock.mock(xx);
+//     }
+//   };
+// });
 
 const defaultOptions = {
   failOnInvalidTypes: false,
