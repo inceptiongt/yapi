@@ -7,6 +7,11 @@
 文档：
 <p><a target="_blank" href="https://hellosean1025.github.io/yapi">hellosean1025.github.io/yapi</a></p>
 
+### fork更新
+
+* 升级jsonschema编辑器——移除mockjs相关配置组件，完善jsonschema字段配置组件
+* 预览页面增加刷新按钮
+
 ### 平台介绍
 ![avatar](yapi-base-flow.jpg)
 
