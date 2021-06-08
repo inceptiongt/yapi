@@ -79,7 +79,7 @@ module.exports = {
           defaultQuery.plugins.push(['import', { libraryName: 'antd' }]);
           return defaultQuery;
         },
-        exclude: isWin ? /(tui-editor|node_modules\\(?!_?(yapi-plugin|json-schema-editor-visual)))/ : /(tui-editor|node_modules\/(?!_?(yapi-plugin|json-schema-editor-visual)))/
+        exclude: isWin ? /(tui-editor|node_modules\\(?!_?(yapi-plugin|.*json-schema-editor-visual)))/ : /(tui-editor|node_modules\/(?!_?(yapi-plugin|.*json-schema-editor-visual)))/
       }
     }
   ],

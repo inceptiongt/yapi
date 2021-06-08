@@ -11,11 +11,11 @@ import EasyDragSort from '../../../../components/EasyDragSort/EasyDragSort.js';
 import mockEditor from 'client/components/AceEditor/mockEditor';
 import AceEditor from 'client/components/AceEditor/AceEditor';
 import axios from 'axios';
-import { MOCK_SOURCE } from '../../../../constants/variable.js';
+// import { MOCK_SOURCE } from '../../../../constants/variable.js';
 import Editor from 'common/tui-editor/dist/tui-editor-Editor-all.min.js';
-const jSchema = require('json-schema-editor-visual');
-const ResBodySchema = jSchema({ lang: 'zh_CN', mock: MOCK_SOURCE });
-const ReqBodySchema = jSchema({ lang: 'zh_CN', mock: MOCK_SOURCE });
+const jSchema = require('@inceptiongt/json-schema-editor-visual-new');
+const ResBodySchema = jSchema({ lang: 'zh_CN' });
+const ReqBodySchema = jSchema({ lang: 'zh_CN' });
 const TabPane = Tabs.TabPane;
 
 
@@ -36,11 +36,11 @@ function checkIsJsonSchema(json) {
     if (!json.type) {
       return false;
     }
-    json.type = json.type.toLowerCase();
-    let types = ['object', 'string', 'number', 'array', 'boolean', 'integer'];
-    if (types.indexOf(json.type) === -1) {
-      return false;
-    }
+      json.type = json.type.toLowerCase();
+      let types = ['object', 'string', 'number', 'array', 'boolean', 'integer'];
+      if (types.indexOf(json.type) === -1) {
+        return false;
+      }
     return JSON.stringify(json);
   } catch (e) {
     return false;
@@ -421,7 +421,8 @@ class InterfaceEditForm extends Component {
       if (this.props.form.getFieldValue('res_body_is_json_schema')) {
         let schema = json5.parse(this.props.form.getFieldValue('res_body'));
         let result = await axios.post('/api/interface/schema2json', {
-          schema: schema
+          schema: schema,
+          required: false
         });
         return this.mockPreview.setValue(JSON.stringify(result.data));
       }
@@ -1123,7 +1124,7 @@ class InterfaceEditForm extends Component {
                         EditFormContext.props.changeEditStatus(true);
                       }
                     }}
-                    isMock={true}
+                    // isMock={true}
                     data={req_body_other_use_schema_editor}
                   />
                 )}
@@ -1236,7 +1237,7 @@ class InterfaceEditForm extends Component {
                             EditFormContext.props.changeEditStatus(true);
                           }
                         }}
-                        isMock={true}
+                        // isMock={true}
                         data={res_body_use_schema_editor}
                       />
                     </div>
@@ -1251,6 +1252,14 @@ class InterfaceEditForm extends Component {
                         fullScreen={true}
                       />
                     )}
+                  <Button 
+                    style={{
+                      display: (this.state.jsonType === 'preview' && this.props.form.getFieldValue('res_body_is_json_schema')) ? 'block' : 'none',
+                      margin: '8px'
+                    }}
+                    onClick={() => this.handleJsonType("preview")}
+                    size="small"
+                  >刷新</Button>
                   <div
                     id="mock-preview"
                     style={{
